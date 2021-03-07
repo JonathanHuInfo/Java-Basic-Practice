@@ -1,3 +1,15 @@
+#idea directory
+.idea/
+#target directory
+target/
+#Output log
+logs/
+
+#other file
+.flattened-pom.xml
+*.iml
+.DS_Store
+.extract
 # Compiled class file
 *.class
 
