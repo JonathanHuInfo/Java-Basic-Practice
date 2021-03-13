@@ -10,6 +10,7 @@ logs/
 *.iml
 .DS_Store
 .extract
+db/
 # Compiled class file
 *.class
 
