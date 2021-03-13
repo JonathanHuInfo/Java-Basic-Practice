@@ -8,20 +8,17 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 /**
- * @description:
+ * @description: 注册页面跳转控制层
  * @author: Jonathan.Hu
  * @since:
- * @create: 2021-03-07 12:20
+ * @create: 2021-03-13 19:28
  **/
-@Path("/hello")
-public class HelloWorldController implements PageController {
+@Path("/register-form")
+public class RegisterPageController implements PageController {
 
     @GET
-    @Path("/world")
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        return "index.jsp";
+        return "register-form.jsp";
     }
-
-
 }

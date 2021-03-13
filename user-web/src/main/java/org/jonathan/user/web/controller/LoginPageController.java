@@ -8,20 +8,17 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 
 /**
- * @description:
+ * @description: 登陆页面跳转
  * @author: Jonathan.Hu
  * @since:
- * @create: 2021-03-07 12:20
+ * @create: 2021-03-13 19:25
  **/
-@Path("/hello")
-public class HelloWorldController implements PageController {
+@Path("/login-form")
+public class LoginPageController implements PageController {
 
     @GET
-    @Path("/world")
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        return "index.jsp";
+        return "login-form.jsp";
     }
-
-
 }

@@ -1,2 +1,5 @@
 org.jonathan.user.web.controller.HelloWorldController
-org.jonathan.user.web.controller.RegisterController
+org.jonathan.user.web.controller.RegisterActionController
+org.jonathan.user.web.controller.RegisterPageController
+org.jonathan.user.web.controller.LoginPageController
+org.jonathan.user.web.controller.SignInActionController

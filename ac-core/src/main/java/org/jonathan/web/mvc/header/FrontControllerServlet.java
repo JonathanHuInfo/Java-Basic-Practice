@@ -88,9 +88,9 @@ public class FrontControllerServlet extends HttpServlet {
                 Path pathFormMethod = method.getAnnotation(Path.class);
                 if (pathFormMethod != null) {
                     requestPath += pathFormMethod.value();
-                    handleMethodInfoMapping.put(requestPath, new HandlerMethodInfo(requestPath, method, supportedHttpMethods));
                 }
-
+                handleMethodInfoMapping.put(requestPath,
+                        new HandlerMethodInfo(requestPath, method, supportedHttpMethods));
             }
             controllersMapping.put(requestPath, controller);
         }
