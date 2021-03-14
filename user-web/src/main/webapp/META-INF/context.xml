@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
+	<!-- Apache Commons Digester (Read-Only) 表达式（规则） -->
+	<!-- Apache Commons DataSource Connection Pool(DBCP) 1.x -->
+	<!-- commons-dbcp:BasicDataSource 实现的 -->
 	<Resource name="jdbc/UserPlatformDB"
               type="javax.sql.DataSource"  auth="Container"
               description="Derby database for User Platform"

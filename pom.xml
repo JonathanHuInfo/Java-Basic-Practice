@@ -80,6 +80,9 @@
         <pluginManagement>
             <plugins>
                 <!-- 源文件的打包插件 -->
+                <!-- Tomcat 7.x 官方文档：
+            http://tomcat.apache.org/tomcat-7.0-doc/index.html
+            -->
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-source-plugin</artifactId>

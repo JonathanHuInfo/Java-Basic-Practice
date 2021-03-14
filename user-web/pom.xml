@@ -62,6 +62,15 @@
                     <!-- ServletContext 路径 -->
                     <port>8080</port>
                     <path>/</path>
+                    <!--
+                    打开JNDI
+                    windows环境导致的错误(不配置)
+                    Exception in thread "main" javax.naming.NoInitialContextException:
+                    Need to specify class name in environment or system property,
+                    or as an applet parameter, or in an application resource file:
+                    java.naming.factory.initial
+                    -->
+                    <enableNaming>true</enableNaming>
                 </configuration>
             </plugin>
         </plugins>
