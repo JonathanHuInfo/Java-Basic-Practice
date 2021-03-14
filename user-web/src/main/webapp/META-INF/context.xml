@@ -1,14 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context>
-	<!-- Apache Commons Digester (Read-Only) 表达式（规则） -->
-	<!-- Apache Commons DataSource Connection Pool(DBCP) 1.x -->
-	<!-- commons-dbcp:BasicDataSource 实现的 -->
-	<Resource name="jdbc/UserPlatformDB"
-              type="javax.sql.DataSource"  auth="Container"
+    <!-- 上下文资源/组建声明(类似于Spring上下文) -->
+    <!-- Apache Commons Digester (Read-Only) 表达式（规则） -->
+    <!-- Apache Commons DataSource Connection Pool(DBCP) 1.x -->
+    <!-- commons-dbcp:BasicDataSource 实现的 -->
+    <!--
+    JNDI： java Naming and Directory Interface
+    ENV-> java:comp/env
+                        /bean
+                             /DBConnectionManager
+   = java:comp/env/bean/DBConnectionManager
+    -->
+<!--    资源或者组建类似与SpringBean -->
+    <Resource name="jdbc/UserPlatformDB"
+              type="javax.sql.DataSource" auth="Container"
               description="Derby database for User Platform"
               maxActive="100" maxIdle="30" maxWait="10000"
-              username="" password="" 
+              username="" password=""
               driverClassName="org.apache.derby.jdbc.EmbeddedDriver"
               url="jdbc:derby:/Users/apple/DataDisk/Workspace/logStorage/Databases/UserPlatformDB"/>
 
+    <!-- facotryBean -->
+    <Resource name="bean/DBConnectionManager" auth="Container"
+              type="org.jonathan.user.sql.DBConnectionManager"
+              factory="org.apache.naming.factory.BeanFactory"/>
 </Context>

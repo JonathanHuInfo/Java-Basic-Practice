@@ -1,6 +1,12 @@
 package org.jonathan.user.sql;
+
+import org.jonathan.user.context.ComponentContext;
 import org.jonathan.user.doman.User;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+import javax.sql.DataSource;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -8,6 +14,9 @@ import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 /**
  * @description: 数据库管理器
  * @author: Jonathan.Hu
@@ -15,33 +24,32 @@ import java.util.Map;
  * @create: 2021-03-13 18:57
  **/
 public class DBConnectionManager {
-    private Connection connection;
-
-    private static DBConnectionManager dbConnectionManager = new DBConnectionManager();
-
-    private DBConnectionManager() {
-    }
-
-    public static DBConnectionManager getInstance() {
-        return dbConnectionManager;
-    }
-
-    public void setConnection(Connection connection) {
-        this.connection = connection;
-    }
-
+    private final Logger logger = Logger.getLogger(DBConnectionManager.class.getName());
     public Connection getConnection() {
-        return this.connection;
+        ComponentContext context = ComponentContext.getInstance();
+        DataSource dataSource = context.getComponent("jdbc/UserPlatformDB");
+        Connection connection = null;
+        try {
+            connection = dataSource.getConnection();
+        } catch (SQLException e) {
+            logger.log(Level.SEVERE, e.getMessage());
+        }
+        if (connection != null) {
+            logger.log(Level.SEVERE, "获取 JNDI 数据库连接成功");
+            logger.log(Level.INFO, "data source: " + dataSource);
+        }
+        return connection;
     }
+
 
     public void releaseConnection() {
-        if (this.connection != null) {
-            try {
-                this.connection.close();
-            } catch (SQLException e) {
-                throw new RuntimeException(e.getCause());
-            }
-        }
+//        if (this.connection != null) {
+//            try {
+//                this.connection.close();
+//            } catch (SQLException e) {
+//                throw new RuntimeException(e.getCause());
+//            }
+//        }
     }
 
     public static final String DROP_USERS_TABLE_DDL_SQL = "DROP TABLE users";
@@ -75,7 +83,7 @@ public class DBConnectionManager {
 
         Statement statement = connection.createStatement();
         // 删除 users 表
-       // System.out.println(statement.execute(DROP_USERS_TABLE_DDL_SQL)); // false
+        // System.out.println(statement.execute(DROP_USERS_TABLE_DDL_SQL)); // false
         // 创建 users 表
         System.out.println(statement.execute(CREATE_USERS_TABLE_DDL_SQL)); // false
         System.out.println(statement.executeUpdate(INSERT_USER_DML_SQL));  // 5

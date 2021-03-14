@@ -1,10 +1,12 @@
 package org.jonathan.user.repository;
 
 
+import org.jonathan.user.context.ComponentContext;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.function.ThrowableFunction;
 import org.jonathan.user.sql.DBConnectionManager;
 
+import javax.naming.NamingException;
 import java.beans.BeanInfo;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
@@ -44,10 +46,10 @@ public class DatabaseUserRepository implements UserRepository {
     }
 
     public DatabaseUserRepository() {
-        this.dbConnectionManager = DBConnectionManager.getInstance();
+        this.dbConnectionManager = ComponentContext.getInstance().getComponent("bean/MyBeanFactory");
     }
 
-    private Connection getConnection() {
+    private Connection getConnection()   {
         return dbConnectionManager.getConnection();
     }
 

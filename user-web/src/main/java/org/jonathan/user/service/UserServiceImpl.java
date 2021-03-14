@@ -14,7 +14,7 @@ public class UserServiceImpl implements UserService{
     }
 
     public UserServiceImpl() {
-        this.userRepository = new DatabaseUserRepository();
+       // this.userRepository = new DatabaseUserRepository();
     }
 
     @Override
