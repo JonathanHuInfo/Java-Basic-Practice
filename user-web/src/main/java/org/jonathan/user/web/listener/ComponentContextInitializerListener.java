@@ -4,15 +4,14 @@ package org.jonathan.user.web.listener;
 import org.jonathan.user.context.ComponentContext;
 import org.jonathan.user.sql.DBConnectionManager;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import javax.servlet.*;
+import java.util.Set;
 
 /**
  * {@link ComponentContext} 初始化容器
  * ContextLoaderListener
  */
-public class ComponentContextInitializerListener implements ServletContextListener {
+public class ComponentContextInitializerListener implements ServletContextListener{
     private ServletContext servletContext;
 
     @Override
@@ -27,7 +26,7 @@ public class ComponentContextInitializerListener implements ServletContextListen
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         servletContext.log("Context destroying");
-        ComponentContext context = ComponentContext.getInstance();
-        context.destroy();
+//        ComponentContext context = ComponentContext.getInstance();
+//        context.destroy();
     }
 }

@@ -12,3 +12,6 @@
 登录成功会forward到登录成功的提示页，若用户名或密码错误则forward到错误提示页
 
 内部使用JNDI和ServletContextListener初始化获取数据库连接
+
+# 第二周作业，遗留的问题
+无法在Web容器中注入

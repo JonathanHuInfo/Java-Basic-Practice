@@ -1,23 +1,42 @@
 package org.jonathan.user.doman;
 
+import org.hibernate.validator.constraints.Length;
+import org.jonathan.user.validator.bean.validation.UserPhoneValid;
 
+import javax.persistence.*;
+import javax.validation.constraints.*;
+import java.io.Serializable;
 import java.util.Objects;
+
+import static javax.persistence.GenerationType.AUTO;
 
 /**
  * 用户领域对象
  *
  * @since 1.0
  */
-public class User {
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = AUTO)
     private Long id;
 
+    @Column
     private String name;
 
+    @Column
+    @Size(min = 6, max = 32, message = "密码长度需为6-32位")
     private String password;
 
+    @Column
     private String email;
 
+    @Column
+    @NotNull
+    // @Pattern(regexp = "1[3|4|5|7|8][0-9]\\d{8}")
+    @UserPhoneValid
     private String phoneNumber;
 
     public Long getId() {
@@ -63,7 +82,7 @@ public class User {
     public User() {
     }
 
-    public User(String name, String password, String email, String phoneNumber) {
+    public User(String name, @Size(min = 6, max = 32, message = "密码长度需为6-32位") String password, String email, @NotNull String phoneNumber) {
         this.name = name;
         this.password = password;
         this.email = email;

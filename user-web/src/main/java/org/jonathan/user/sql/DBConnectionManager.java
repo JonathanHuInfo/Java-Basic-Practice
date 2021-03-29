@@ -2,11 +2,16 @@ package org.jonathan.user.sql;
 
 import org.jonathan.user.context.ComponentContext;
 import org.jonathan.user.doman.User;
+import org.jonathan.user.repository.UserRepository;
+import org.jonathan.user.service.UserService;
 
+import javax.annotation.Resource;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.naming.NamingException;
+import javax.persistence.EntityManager;
 import javax.sql.DataSource;
+import javax.validation.Validator;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -24,32 +29,39 @@ import java.util.logging.Logger;
  * @create: 2021-03-13 18:57
  **/
 public class DBConnectionManager {
+    @Resource(name = "jdbc/UserPlatformDB")
+    private DataSource dataSource;
+
+    @Resource(name = "bean/EntityManager")
+    private EntityManager entityManager;
+
     private final Logger logger = Logger.getLogger(DBConnectionManager.class.getName());
     public Connection getConnection() {
-        ComponentContext context = ComponentContext.getInstance();
-        DataSource dataSource = context.getComponent("jdbc/UserPlatformDB");
+        // 依赖查找
         Connection connection = null;
         try {
-            connection = dataSource.getConnection();
+             connection = dataSource.getConnection();
         } catch (SQLException e) {
             logger.log(Level.SEVERE, e.getMessage());
         }
         if (connection != null) {
-            logger.log(Level.SEVERE, "获取 JNDI 数据库连接成功");
-            logger.log(Level.INFO, "data source: " + dataSource);
+            logger.log(Level.INFO, "获取 JNDI 数据库连接成功！");
         }
         return connection;
     }
+    public EntityManager getEntityManager() {
+        logger.info("当前 EntityManager 实现类：" + entityManager.getClass().getName());
+        return entityManager;
+    }
 
-
-    public void releaseConnection() {
-//        if (this.connection != null) {
-//            try {
-//                this.connection.close();
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e.getCause());
-//            }
-//        }
+    public void releaseConnection(Connection connection) {
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                throw new RuntimeException(e.getCause());
+            }
+        }
     }
 
     public static final String DROP_USERS_TABLE_DDL_SQL = "DROP TABLE users";

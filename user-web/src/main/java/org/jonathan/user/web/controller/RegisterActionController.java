@@ -6,6 +6,7 @@ import org.jonathan.user.service.UserService;
 import org.jonathan.user.service.UserServiceImpl;
 import org.jonathan.web.mvc.controller.PageController;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.POST;
@@ -20,7 +21,9 @@ import javax.ws.rs.Path;
 @Path("/register")
 public class RegisterActionController implements PageController {
 
-    private final UserService userService = new UserServiceImpl();
+    @Resource(name = "bean/UserService")
+    private UserService userService;
+
 
     @POST
     @Override

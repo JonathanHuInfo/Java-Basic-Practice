@@ -2,9 +2,11 @@ package org.jonathan.user.web.listener;
 
 
 import org.jonathan.user.context.ComponentContext;
+import org.jonathan.user.doman.User;
 import org.jonathan.user.sql.DBConnectionManager;
 
-import javax.servlet.ServletContext;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.util.logging.Logger;
@@ -20,9 +22,27 @@ public class TestingListener implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent sce) {
         ComponentContext context = ComponentContext.getInstance();
-        DBConnectionManager dbConnectionManager = context.getComponent("/bean/DBConnectionManager");
+        DBConnectionManager dbConnectionManager = context.getComponent("bean/DBConnectionManager");
         dbConnectionManager.getConnection();
+        testUser(dbConnectionManager.getEntityManager());
+        logger.info("所有的 JNDI 组件名称：[");
+        context.getComponentNames().forEach(logger::info);
+        logger.info("]");
+    }
 
+    private void testUser(EntityManager entityManager) {
+        User user = new User();
+        user.setId(null);
+        user.setName("小马哥");
+        user.setPassword("******");
+        user.setEmail("mercyblitz@gmail.com");
+        user.setPhoneNumber("13466668888");
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(user);
+        transaction.commit();
+        logger.info("testInsertUser userId = " + user.getId());
+        System.out.println(entityManager.find(User.class, user.getId()));
     }
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
