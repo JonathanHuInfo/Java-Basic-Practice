@@ -17,5 +17,10 @@ JNDI依赖查找简单实现
 
 内部使用JNDI和ServletContextListener初始化获取数据库连接
 
-# 第二周作业，遗留的问题
-无法在Web容器中注入
+# 第二周
+## 内容描述
+上下文重构 新增依赖注入信息
+Bean validator
+## 作业描述
+问题:
+- 无法在Web容器中注入
