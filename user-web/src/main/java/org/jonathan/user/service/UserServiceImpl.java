@@ -1,5 +1,6 @@
 package org.jonathan.user.service;
 
+import org.jonathan.user.context.ComponentContext;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.repository.DatabaseUserRepository;
 import org.jonathan.user.repository.UserRepository;
@@ -15,17 +16,14 @@ import java.util.Set;
 
 public class UserServiceImpl implements UserService{
 
-    @Resource(name = "bean/UserRepository")
     private UserRepository userRepository;
 
-    @Resource(name = "bean/Validator")
     private Validator validator;
 
     @Override
     public boolean register(User user) {
-        // ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-        // cache the factory somewhere
-        // javax.validation.Validator validator = factory.getValidator();
+        userRepository=ComponentContext.getInstance().getComponent("bean/UserRepository");
+        validator= ComponentContext.getInstance().getComponent("bean/Validator");
         // 校验结果
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         if (violations.size() > 0) {

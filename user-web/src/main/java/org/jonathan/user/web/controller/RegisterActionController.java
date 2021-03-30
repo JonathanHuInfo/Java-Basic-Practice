@@ -1,6 +1,7 @@
 package org.jonathan.user.web.controller;
 
 import org.apache.commons.lang.StringUtils;
+import org.jonathan.user.context.ComponentContext;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.service.UserService;
 import org.jonathan.user.service.UserServiceImpl;
@@ -21,13 +22,14 @@ import javax.ws.rs.Path;
 @Path("/register")
 public class RegisterActionController implements PageController {
 
-    @Resource(name = "bean/UserService")
     private UserService userService;
+
 
 
     @POST
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        userService= ComponentContext.getInstance().getComponent("bean/UserService");
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         String email = request.getParameter("email");
