@@ -1,17 +1,11 @@
 package org.jonathan.user.sql;
 
-import org.jonathan.user.context.ComponentContext;
+import org.jonathan.context.ComponentContext;
 import org.jonathan.user.doman.User;
-import org.jonathan.user.repository.UserRepository;
-import org.jonathan.user.service.UserService;
 
 import javax.annotation.Resource;
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.persistence.EntityManager;
 import javax.sql.DataSource;
-import javax.validation.Validator;
 import java.beans.BeanInfo;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;

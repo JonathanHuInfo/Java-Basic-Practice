@@ -46,4 +46,8 @@
     <Resource name="bean/UserService" auth="Container"
               type="org.jonathan.user.service.UserServiceImpl"
               factory="org.apache.naming.factory.BeanFactory" />
+
+
+    <Environment name="maxValue" value="12"
+                 type="java.lang.Integer" override="false"/>
 </Context>

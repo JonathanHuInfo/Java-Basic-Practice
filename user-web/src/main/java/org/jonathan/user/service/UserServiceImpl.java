@@ -1,15 +1,10 @@
 package org.jonathan.user.service;
 
-import org.jonathan.user.context.ComponentContext;
+import org.jonathan.context.ComponentContext;
 import org.jonathan.user.doman.User;
-import org.jonathan.user.repository.DatabaseUserRepository;
 import org.jonathan.user.repository.UserRepository;
-import org.jonathan.user.sql.DBConnectionManager;
-import org.jonathan.user.sql.LocalTransactional;
 import org.jonathan.user.utils.MD5Utils;
 
-import javax.annotation.Resource;
-import javax.persistence.EntityManager;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.Set;

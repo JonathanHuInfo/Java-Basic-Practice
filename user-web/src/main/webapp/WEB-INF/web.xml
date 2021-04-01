@@ -4,6 +4,12 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
          http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
          metadata-complete="true" version="2.5">
+    <!-- ServletContext ÅäÖÃ²ÎÊý -->
+    <context-param>
+        <param-name>application.name</param-name>
+        <param-value>user-web</param-value>
+    </context-param>
+
     <listener>
         <listener-class>org.jonathan.user.web.listener.ComponentContextInitializerListener</listener-class>
     </listener>

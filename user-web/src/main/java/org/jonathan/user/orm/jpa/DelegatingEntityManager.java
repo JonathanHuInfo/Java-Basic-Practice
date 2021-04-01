@@ -1,7 +1,7 @@
 package org.jonathan.user.orm.jpa;
 
 
-import org.jonathan.user.context.ComponentContext;
+import org.jonathan.context.ComponentContext;
 
 import javax.annotation.PostConstruct;
 import javax.persistence.*;

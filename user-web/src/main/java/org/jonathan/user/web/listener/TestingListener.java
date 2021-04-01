@@ -1,12 +1,13 @@
 package org.jonathan.user.web.listener;
 
 
-import org.jonathan.user.context.ComponentContext;
+import org.jonathan.context.ComponentContext;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.sql.DBConnectionManager;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 import java.util.logging.Logger;
@@ -24,10 +25,23 @@ public class TestingListener implements ServletContextListener {
         ComponentContext context = ComponentContext.getInstance();
         DBConnectionManager dbConnectionManager = context.getComponent("bean/DBConnectionManager");
         dbConnectionManager.getConnection();
+
+        /*外部化配置START*/
+        testPropertyFromServletContext(sce.getServletContext());
+
+        testPropertyFromJNDI(context);
+        /*外部化配置END*/
+
         testUser(dbConnectionManager.getEntityManager());
         logger.info("所有的 JNDI 组件名称：[");
         context.getComponentNames().forEach(logger::info);
         logger.info("]");
+    }
+
+    private void testPropertyFromServletContext(ServletContext servletContext) {
+        String propertyName = "application.name";
+        logger.info("ServletContext Property[" + propertyName + "] : "
+                + servletContext.getInitParameter(propertyName));
     }
 
     private void testUser(EntityManager entityManager) {
@@ -48,4 +62,9 @@ public class TestingListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
     }
 
+    private void testPropertyFromJNDI(ComponentContext context) {
+        String propertyName = "maxValue";
+        logger.info("JNDI Property[" + propertyName + "] : "
+                + context.lookupComponent(propertyName));
+    }
 }

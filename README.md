@@ -1,5 +1,6 @@
 # actual-fromwork
-
+## 描述
+主要用于主脉路学习
 ## Web启动
 1. ROOT maven  clean <next> install
 2. tomcat7:run
@@ -25,6 +26,7 @@ Bean validator
 问题:
 - 无法在Web容器中注入
 - 只是通过硬编码获取
+
 # 第三周
 - 配置
 - Logging

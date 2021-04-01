@@ -1,13 +1,11 @@
 package org.jonathan.user.web.controller;
 
 import org.apache.commons.lang.StringUtils;
-import org.jonathan.user.context.ComponentContext;
+import org.jonathan.context.ComponentContext;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.service.UserService;
-import org.jonathan.user.service.UserServiceImpl;
 import org.jonathan.web.mvc.controller.PageController;
 
-import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.POST;

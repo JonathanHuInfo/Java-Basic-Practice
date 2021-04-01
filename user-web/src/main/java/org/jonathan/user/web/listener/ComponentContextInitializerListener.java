@@ -1,11 +1,9 @@
 package org.jonathan.user.web.listener;
 
 
-import org.jonathan.user.context.ComponentContext;
-import org.jonathan.user.sql.DBConnectionManager;
+import org.jonathan.context.ComponentContext;
 
 import javax.servlet.*;
-import java.util.Set;
 
 /**
  * {@link ComponentContext} 初始化容器
