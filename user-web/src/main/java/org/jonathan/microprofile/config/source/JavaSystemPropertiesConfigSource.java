@@ -8,37 +8,23 @@ import java.util.Properties;
 import java.util.Set;
 
 /**
- * @description:
+ * @description: Java 系统属性：通过 System.getProperties() 获取
  * @author: Jonathan.Hu
  * @since:
  * @create: 2021-03-30 23:55
  **/
-public class JavaSystemPropertiesConfigSource implements ConfigSource {
+public class JavaSystemPropertiesConfigSource extends MapBaseConfigSource {
     /*
     Java 系统属性最好通过本地变量保存，使用Map保存，尽可能运行期不去调整
     -Dapplicationn.name=user-web
      */
-    private final Map<String,String> properties;
-
     public JavaSystemPropertiesConfigSource() {
-         this.properties=new HashMap<>();
-         for (String propertyName:System.getProperties().stringPropertyNames()){
-             this.properties.put(propertyName,System.getProperties().getProperty(propertyName));
-         }
+        super("Java System Properties Config Source", 200);
     }
 
     @Override
-    public Set<String> getPropertyNames() {
-        return properties.keySet();
-    }
-
-    @Override
-    public String getValue(String propertyName) {
-        return properties.get(propertyName);
-    }
-
-    @Override
-    public String getName() {
-        return "Java System Properties";
+    protected void parseConfigData(Map configData) {
+        logger.info("Load config from java system properties success");
+        configData.putAll(System.getProperties());
     }
 }

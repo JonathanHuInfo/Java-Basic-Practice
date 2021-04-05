@@ -1,6 +1,9 @@
 package org.jonathan.user.web.listener;
 
 
+import org.eclipse.microprofile.config.Config;
+import org.eclipse.microprofile.config.spi.ConfigBuilder;
+import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
 import org.jonathan.context.ComponentContext;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.management.MBeanHelper;
@@ -40,6 +43,8 @@ public class TestingListener implements ServletContextListener {
         context.getComponentNames().forEach(logger::info);
         logger.info("]");
 
+        //外部化配置
+        testMicroprofileConfig();
         //注册MBean
         registerMBean();
     }
@@ -48,6 +53,42 @@ public class TestingListener implements ServletContextListener {
         String propertyName = "application.name";
         logger.info("ServletContext Property[" + propertyName + "] : "
                 + servletContext.getInitParameter(propertyName));
+    }
+
+    private void testMicroprofileConfig() {
+        logger.info("read config by microprofile.config:");
+        ConfigProviderResolver provider = ConfigProviderResolver.instance();
+
+        Config providerConfig = provider.getConfig();
+
+        ConfigBuilder builder = provider.getBuilder();
+        builder.addDefaultSources();
+        builder.addDiscoveredConverters();
+        String applicationNameKey = "application.name";
+        Config buildConfig = builder.build();
+
+        String applicationName = buildConfig.getValue(applicationNameKey, String.class);
+        String applicationNameByProviderConfig = providerConfig.getValue(applicationNameKey, String.class);
+
+        Byte byteValue = buildConfig.getValue("id", Byte.class);
+        Short shortValue = buildConfig.getValue("id", Short.class);
+
+        Integer integerValue = buildConfig.getValue("id", Integer.class);
+        Long longValue = buildConfig.getValue("id", Long.class);
+        Boolean debug = buildConfig.getValue("debug", Boolean.class);
+
+        Float floatValue = buildConfig.getValue("version", Float.class);
+        Double doubleValue = buildConfig.getValue("version", Double.class);
+
+        logger.info(String.format("converter string value [application.name = %s]", applicationName));
+        logger.info(String.format("converter string value by providerConfig [application.name = %s]", applicationNameByProviderConfig));
+        logger.info(String.format("converter byte value [id = %s]", byteValue));
+        logger.info(String.format("converter short value [id = %s]", shortValue));
+        logger.info(String.format("converter int value [id = %s]", integerValue));
+        logger.info(String.format("converter long value [id = %s]", longValue));
+        logger.info(String.format("converter boolean value [debug switch = %s]", debug));
+        logger.info(String.format("converter float value [version = %s]", floatValue));
+        logger.info(String.format("converter double value [version = %s]", doubleValue));
     }
 
     private void registerMBean() {
@@ -75,6 +116,7 @@ public class TestingListener implements ServletContextListener {
         logger.info("testInsertUser userId = " + user.getId());
         System.out.println(entityManager.find(User.class, user.getId()));
     }
+
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
     }
