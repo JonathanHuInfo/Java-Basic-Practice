@@ -10,23 +10,42 @@
 JDBC 封装
 JNDI依赖查找简单实现
 ## 作业描述
-运行成功后，可访问 http://localhost:8080/register-form 注册用户
+- 运行成功后，可访问 [注册用户地址](http://localhost:8080/register-form)
 
-注册成功后跳转至登录页 http://localhost:8080/login-form 进行登录
+- 注册成功后跳转至[登录页](http://localhost:8080/login-form) 进行登录
 
-登录成功会forward到登录成功的提示页，若用户名或密码错误则forward到错误提示页
+- 登录成功会forward到登录成功的提示页，若用户名或密码错误则forward到错误提示页
 
-内部使用JNDI和ServletContextListener初始化获取数据库连接
+- 内部使用JNDI和ServletContextListener初始化获取数据库连接
 
 # 第二周
 ## 内容描述
 上下文重构 新增依赖注入信息
+
 Bean validator
 ## 作业描述
 问题:
-- 无法在Web容器中注入
-- 只是通过硬编码获取
+
+- 无法在Web容器中注入、只是通过硬编码获取
 
 # 第三周
+## 内容描述
 - 配置
+  - 外部化配置
+  - 监控 先jmx
 - Logging
+## 作业描述
+- 集成jolokia
+
+  - 加入Maven坐标
+  - 编写MBean org.jonathan.user.management.UserManager
+  - Test监听中注册
+
+[访问MBean](http://127.0.0.1:8080/jolokia/read/org.jonathan.user.doman.user.jmx:type=UserManager)
+
+[访问MBean name属性](http://127.0.0.1:8080/jolokia/read/org.jonathan.user.doman.user.jmx:type=UserManager/Name)
+
+[写入MBean name属性数据](http://127.0.0.1:8080/jolokia/write/org.jonathan.user.doman.user.jmx:type=UserManager/Name/hello)
+
+[MBean方法调用(toString)](http://127.0.0.1:8080/jolokia/exec/org.jonathan.user.doman.user.jmx:type=UserManager/toString)
+

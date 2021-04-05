@@ -43,7 +43,7 @@
         <glassfish-el.version>3.0.1-b08</glassfish-el.version>
         <jackson.version>2.9.5</jackson.version>
         <activemq.version>5.9.1</activemq.version>
-
+        <jolokia.version>1.6.2</jolokia.version>
         <!-- Testing 版本 -->
         <junit.version>4.13</junit.version>
 
@@ -221,6 +221,18 @@
                 <artifactId>junit</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
+            </dependency>
+
+          <!--  jolokia -->
+            <dependency>
+                <groupId>org.jolokia</groupId>
+                <artifactId>jolokia-client-java</artifactId>
+                <version>${jolokia.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.jolokia</groupId>
+                <artifactId>jolokia-core</artifactId>
+                <version>${jolokia.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

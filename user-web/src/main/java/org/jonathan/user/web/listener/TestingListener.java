@@ -3,8 +3,11 @@ package org.jonathan.user.web.listener;
 
 import org.jonathan.context.ComponentContext;
 import org.jonathan.user.doman.User;
+import org.jonathan.user.management.MBeanHelper;
+import org.jonathan.user.management.UserManager;
 import org.jonathan.user.sql.DBConnectionManager;
 
+import javax.management.ObjectName;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
 import javax.servlet.ServletContext;
@@ -36,12 +39,26 @@ public class TestingListener implements ServletContextListener {
         logger.info("所有的 JNDI 组件名称：[");
         context.getComponentNames().forEach(logger::info);
         logger.info("]");
+
+        //注册MBean
+        registerMBean();
     }
 
     private void testPropertyFromServletContext(ServletContext servletContext) {
         String propertyName = "application.name";
         logger.info("ServletContext Property[" + propertyName + "] : "
                 + servletContext.getInitParameter(propertyName));
+    }
+
+    private void registerMBean() {
+        try {
+            MBeanHelper.registerMBean(new UserManager(new User()),
+                    new ObjectName("org.jonathan.user.doman.user.jmx:type=UserManager"));
+            logger.info("registerMBean success...");
+        } catch (Exception e) {
+            logger.info("registerMBean throw exception, msg = " + e.getMessage());
+            throw new RuntimeException(e);
+        }
     }
 
     private void testUser(EntityManager entityManager) {
