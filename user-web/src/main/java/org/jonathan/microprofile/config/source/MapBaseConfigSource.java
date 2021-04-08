@@ -8,6 +8,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Logger;
 
+/**
+ * Map 配置抽象
+ */
 public abstract class MapBaseConfigSource implements ConfigSource {
 
     protected final Logger logger = Logger.getLogger(this.getClass().getName());

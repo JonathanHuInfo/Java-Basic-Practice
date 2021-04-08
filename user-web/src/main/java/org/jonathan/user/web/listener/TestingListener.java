@@ -61,9 +61,7 @@ public class TestingListener implements ServletContextListener {
 
         Config providerConfig = provider.getConfig();
 
-        ConfigBuilder builder = provider.getBuilder();
-        builder.addDefaultSources();
-        builder.addDiscoveredConverters();
+        ConfigBuilder builder = provider.getBuilder().addDefaultSources().addDiscoveredConverters();
         String applicationNameKey = "application.name";
         Config buildConfig = builder.build();
 

@@ -1,6 +1,6 @@
 package org.jonathan.microprofile.config.converter;
 
-public class ByteConverter extends DefaultAbstractConverter<Byte> {
+public class ByteConverter extends AbstractConverter<Byte> {
 
     @Override
     protected Byte doConvert(String value) {

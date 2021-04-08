@@ -1,6 +1,6 @@
 package org.jonathan.microprofile.config.converter;
 
-public class LongConverter extends DefaultAbstractConverter<Long> {
+public class LongConverter extends AbstractConverter<Long> {
 
     @Override
     protected Long doConvert(String value) {

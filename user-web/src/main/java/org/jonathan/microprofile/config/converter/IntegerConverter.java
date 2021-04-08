@@ -1,6 +1,6 @@
 package org.jonathan.microprofile.config.converter;
 
-public class IntegerConverter extends DefaultAbstractConverter<Integer> {
+public class IntegerConverter extends AbstractConverter<Integer> {
 
     @Override
     protected Integer doConvert(String value) {

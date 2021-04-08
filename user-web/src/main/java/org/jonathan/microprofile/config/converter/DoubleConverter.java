@@ -1,6 +1,6 @@
 package org.jonathan.microprofile.config.converter;
 
-public class DoubleConverter extends DefaultAbstractConverter<Double> {
+public class DoubleConverter extends AbstractConverter<Double> {
 
     @Override
     protected Double doConvert(String value) {

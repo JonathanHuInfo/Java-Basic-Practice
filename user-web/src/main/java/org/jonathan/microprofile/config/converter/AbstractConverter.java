@@ -2,7 +2,7 @@ package org.jonathan.microprofile.config.converter;
 
 import org.eclipse.microprofile.config.spi.Converter;
 
-public abstract class DefaultAbstractConverter<T> implements Converter<T> {
+public abstract class AbstractConverter<T> implements Converter<T> {
 
     @Override
     public T convert(String value) throws IllegalArgumentException, NullPointerException {
