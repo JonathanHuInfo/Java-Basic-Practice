@@ -1,6 +1,7 @@
 package org.jonathan.user.web.listener;
 
 
+import org.jonathan.context.ClassicComponentContext;
 import org.jonathan.context.ComponentContext;
 
 import javax.servlet.*;
@@ -16,7 +17,7 @@ public class ComponentContextInitializerListener implements ServletContextListen
     public void contextInitialized(ServletContextEvent sce) {
         servletContext = sce.getServletContext();
         servletContext.log("Context initializing");
-        ComponentContext context = new ComponentContext();
+        ClassicComponentContext context = new ClassicComponentContext();
         context.init(servletContext);
     }
 

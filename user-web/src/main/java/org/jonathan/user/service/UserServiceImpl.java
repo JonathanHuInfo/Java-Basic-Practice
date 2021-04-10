@@ -1,24 +1,27 @@
 package org.jonathan.user.service;
 
+import org.jonathan.context.ClassicComponentContext;
 import org.jonathan.context.ComponentContext;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.repository.UserRepository;
 import org.jonathan.user.utils.MD5Utils;
 
+import javax.annotation.Resource;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 import java.util.Set;
 
 public class UserServiceImpl implements UserService{
 
+    @Resource(name = "bean/UserRepository")
     private UserRepository userRepository;
-
+    @Resource(name = "bean/Validator")
     private Validator validator;
 
     @Override
     public boolean register(User user) {
-        userRepository=ComponentContext.getInstance().getComponent("bean/UserRepository");
-        validator= ComponentContext.getInstance().getComponent("bean/Validator");
+        userRepository= ClassicComponentContext.getInstance().getComponent("bean/UserRepository");
+        validator= ClassicComponentContext.getInstance().getComponent("bean/Validator");
         // 校验结果
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         if (violations.size() > 0) {

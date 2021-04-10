@@ -4,6 +4,7 @@ package org.jonathan.user.web.listener;
 import org.eclipse.microprofile.config.Config;
 import org.eclipse.microprofile.config.spi.ConfigBuilder;
 import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
+import org.jonathan.context.ClassicComponentContext;
 import org.jonathan.context.ComponentContext;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.management.MBeanHelper;
@@ -28,7 +29,7 @@ public class TestingListener implements ServletContextListener {
 
     @Override
     public void contextInitialized(ServletContextEvent sce) {
-        ComponentContext context = ComponentContext.getInstance();
+        ClassicComponentContext context = ClassicComponentContext.getInstance();
         DBConnectionManager dbConnectionManager = context.getComponent("bean/DBConnectionManager");
         dbConnectionManager.getConnection();
 
@@ -119,7 +120,7 @@ public class TestingListener implements ServletContextListener {
     public void contextDestroyed(ServletContextEvent sce) {
     }
 
-    private void testPropertyFromJNDI(ComponentContext context) {
+    private void testPropertyFromJNDI(ClassicComponentContext context) {
         String propertyName = "maxValue";
         logger.info("JNDI Property[" + propertyName + "] : "
                 + context.lookupComponent(propertyName));

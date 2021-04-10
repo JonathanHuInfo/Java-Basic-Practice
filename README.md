@@ -50,3 +50,10 @@ Bean validator
 [MBean方法调用(toString)](http://127.0.0.1:8080/jolokia/exec/org.jonathan.user.doman.user.jmx:type=UserManager/toString)
 
 - Microprofile config API 中的实现
+
+# 第四周
+## 内容描述
+
+- maven管理
+- 持续交互、持续集成
+## 作业描述
