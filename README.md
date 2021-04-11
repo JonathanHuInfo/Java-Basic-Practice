@@ -57,5 +57,7 @@ Bean validator
 - maven管理
 - 持续交互、持续集成
 ## 作业描述
-
 - 通过SPI 动态加载`javax.servlet.ServletContextListener` 实现注入到Servlet容器监听中 摆脱对Web.xml的依赖
+- Service层可以依赖注入
+- Query无法查询出数据
+- 没有完成 config 在mvc中的应用
