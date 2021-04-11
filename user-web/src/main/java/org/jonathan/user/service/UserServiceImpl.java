@@ -20,8 +20,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public boolean register(User user) {
-        userRepository= ClassicComponentContext.getInstance().getComponent("bean/UserRepository");
-        validator= ClassicComponentContext.getInstance().getComponent("bean/Validator");
         // 校验结果
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         if (violations.size() > 0) {
@@ -50,6 +48,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User queryUserByNameAndPassword(String name, String password) {
-        return userRepository.getByNameAndPassword(name, password);
+        return userRepository.getByNameAndPassword(name, MD5Utils.encode(password));
     }
 }

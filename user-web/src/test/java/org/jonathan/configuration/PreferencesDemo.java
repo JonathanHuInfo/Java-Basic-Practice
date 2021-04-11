@@ -17,7 +17,6 @@ public class PreferencesDemo {
             for (String s : userCildrenNames) {
                 System.out.println(s);
             }
-
             System.out.println(userPreferences.absolutePath());
         } catch (BackingStoreException e) {
             e.printStackTrace();

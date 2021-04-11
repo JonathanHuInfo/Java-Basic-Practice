@@ -1,5 +1,6 @@
 package org.jonathan.user.web.controller;
 
+import org.jonathan.context.ClassicComponentContext;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.service.UserService;
 import org.jonathan.user.service.UserServiceImpl;
@@ -19,11 +20,12 @@ import javax.ws.rs.Path;
 @Path("/sign-in")
 public class SignInActionController implements PageController {
 
-    private final UserService userService = new UserServiceImpl();
+    private UserService userService;
 
     @POST
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Throwable {
+        userService= ClassicComponentContext.getInstance().getComponent("bean/UserService");
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         User loginUser = userService.queryUserByNameAndPassword(name, password);

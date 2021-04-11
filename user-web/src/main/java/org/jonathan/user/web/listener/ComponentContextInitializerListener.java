@@ -25,7 +25,7 @@ public class ComponentContextInitializerListener implements ServletContextListen
     @Override
     public void contextDestroyed(ServletContextEvent sce) {
         servletContext.log("Context destroying");
-//        ComponentContext context = ComponentContext.getInstance();
-//        context.destroy();
+        ClassicComponentContext context = ClassicComponentContext.getInstance();
+        context.destroy();
     }
 }
