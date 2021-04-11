@@ -20,7 +20,17 @@
     <dependencies>
         <dependency>
             <groupId>org.jonathan</groupId>
-            <artifactId>ac-core</artifactId>
+            <artifactId>ac-dependency-injection</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jonathan</groupId>
+            <artifactId>ac-configuration</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jonathan</groupId>
+            <artifactId>ac-web-mvc</artifactId>
             <version>${revision}</version>
         </dependency>
         <!-- Servlet API -->
@@ -32,10 +42,6 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>jstl</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.eclipse.microprofile.config</groupId>
-            <artifactId>microprofile-config-api</artifactId>
         </dependency>
         <dependency>
             <groupId>org.apache.derby</groupId>
@@ -104,7 +110,6 @@
             <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.1</version>
                 <executions>
                     <execution>
                         <id>tomcat-run</id>

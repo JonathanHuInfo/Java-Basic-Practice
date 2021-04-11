@@ -1,0 +1,8 @@
+org.jonathan.configuration.microprofile.config.converter.StringConverter
+org.jonathan.configuration.microprofile.config.converter.ByteConverter
+org.jonathan.configuration.microprofile.config.converter.ShortConverter
+org.jonathan.configuration.microprofile.config.converter.IntegerConverter
+org.jonathan.configuration.microprofile.config.converter.LongConverter
+org.jonathan.configuration.microprofile.config.converter.FloatConverter
+org.jonathan.configuration.microprofile.config.converter.DoubleConverter
+org.jonathan.configuration.microprofile.config.converter.BooleanConverter

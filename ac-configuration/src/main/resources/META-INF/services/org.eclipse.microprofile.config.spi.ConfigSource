@@ -1,0 +1,3 @@
+org.jonathan.configuration.microprofile.config.source.JavaSystemPropertiesConfigSource
+org.jonathan.configuration.microprofile.config.source.JavaLocalPropertiesConfigSource
+org.jonathan.configuration.microprofile.config.source.JavaOSPropertiesConfigSource

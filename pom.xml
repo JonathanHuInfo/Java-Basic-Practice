@@ -8,11 +8,35 @@
     <artifactId>actual-fromwork</artifactId>
     <packaging>pom</packaging>
     <version>${revision}</version>
+    <name>Actual Fromwork ${revision}</name>
     <modules>
-        <module>ac-core</module>
         <module>user-web</module>
+        <module>ac-configuration</module>
+        <module>ac-dependency-injection</module>
+        <module>ac-reactive-messaging</module>
+        <module>ac-rest-client</module>
+        <module>ac-web-mvc</module>
     </modules>
+    <scm>
+        <url>https://github.com/JonathanHuInfo/actual-fromwork</url>
+        <connection>
+            scm:git@github.com:JonathanHuInfo/actual-fromwork.git
+        </connection>
+        <developerConnection>
+            scm:git:ssh://git@github.com:JonathanHuInfo/actual-fromwork.git
+        </developerConnection>
+        <tag>HEAD</tag>
+    </scm>
 
+    <developers>
+        <developer>
+            <id>jonathan</id>
+            <name>Jonathan Hu</name>
+            <email>persesniper@gmail.com</email>
+            <organization>Freelance</organization>
+            <url>https://github.com/JonathanHuInfo</url>
+        </developer>
+    </developers>
 
     <properties>
         <revision>v1-SNAPSHOT</revision>
@@ -44,6 +68,7 @@
         <jackson.version>2.9.5</jackson.version>
         <activemq.version>5.9.1</activemq.version>
         <jolokia.version>1.6.2</jolokia.version>
+
         <!-- Testing 版本 -->
         <junit.version>4.13</junit.version>
 
@@ -223,7 +248,7 @@
                 <scope>test</scope>
             </dependency>
 
-          <!--  jolokia -->
+            <!--  jolokia -->
             <dependency>
                 <groupId>org.jolokia</groupId>
                 <artifactId>jolokia-client-java</artifactId>
@@ -298,6 +323,7 @@
             <!--
             生成一个压缩版的pom.xml文件，然后在install和deploy阶段使用压缩后的pom.xml文件，替换原来的pom.xml文件
             -->
+            <!-- 应用场景:mvn clean package -Drevision=1.0.0 (改变插值) -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
@@ -325,4 +351,113 @@
             </plugin>
         </plugins>
     </build>
+    <!--
+    应用场景:
+    兼容性切换
+    发布环境切换
+     -->
+    <profiles>
+
+        <profile>
+            <!-- Commons Lang 2.5 -->
+            <id>commons-lang-2.5</id>
+            <properties>
+                <commons-lang.version>2.5</commons-lang.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- Commons Lang 2.4 -->
+            <id>commons-lang-2.4</id>
+            <properties>
+                <commons-lang.version>2.4</commons-lang.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <!-- Commons Lang 2.3 -->
+            <id>commons-lang-2.3</id>
+            <properties>
+                <commons-lang.version>2.3</commons-lang.version>
+            </properties>
+        </profile>
+
+        <profile>
+            <id>tomcat-7</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <!-- Tomcat Maven 插件用于构建可执行 war -->
+                        <!-- Tomcat 7.x 官方文档：
+                        http://tomcat.apache.org/tomcat-7.0-doc/index.html
+                        -->
+                        <plugin>
+                            <groupId>org.apache.tomcat.maven</groupId>
+                            <artifactId>tomcat7-maven-plugin</artifactId>
+                            <version>2.1</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+
+            </build>
+        </profile>
+
+        <profile>
+            <id>tomcat-8</id>
+            <build>
+                <pluginManagement>
+                    <plugins>
+                        <!-- Tomcat 8 Maven 插件用于构建可执行 war -->
+                        <!-- https://mvnrepository.com/artifact/org.apache.tomcat.maven/tomcat8-maven-plugin -->
+                        <plugin>
+                            <groupId>org.apache.tomcat.maven</groupId>
+                            <artifactId>tomcat8-maven-plugin</artifactId>
+                            <version>3.0-r1655215</version>
+                        </plugin>
+                    </plugins>
+                </pluginManagement>
+            </build>
+            <pluginRepositories>
+                <pluginRepository>
+                    <!-- tomcat8-maven-plugin 所在仓库 -->
+                    <id>Alfresco</id>
+                    <name>Alfresco Repository</name>
+                    <url>https://artifacts.alfresco.com/nexus/content/repositories/public/</url>
+                    <snapshots>
+                        <enabled>false</enabled>
+                    </snapshots>
+                </pluginRepository>
+            </pluginRepositories>
+        </profile>
+    </profiles>
+    <!-- 配置远程仓库 如果需要deploy 到远程仓库需要 setting.xml 配置 仓库账号  -->
+   <!-- <distributionManagement>
+        <repository>
+            <id>nexus-releases</id>
+            <name>Nexus Release Repository</name>
+            <url>http://39.98.242.200:19961/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus-snapshots</id>
+            <name>Nexus Snapshot Repository</name>
+            <url>http://39.98.242.200:19961/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+    <repositories>
+        <repository>
+            <id>Nexus</id>
+            <name>Nexus Repository</name>
+            <url>http://39.98.242.200:19961/repository/maven-public/</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            &lt;!&ndash;snapshots默认是关闭的,需要开启  &ndash;&gt;
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+    </repositories>-->
 </project>

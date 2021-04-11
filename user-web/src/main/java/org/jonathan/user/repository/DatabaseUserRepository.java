@@ -1,8 +1,8 @@
 package org.jonathan.user.repository;
 
 
+import org.jonathan.function.ThrowableFunction;
 import org.jonathan.user.doman.User;
-import org.jonathan.user.function.ThrowableFunction;
 import org.jonathan.user.sql.DBConnectionManager;
 import org.jonathan.user.utils.BeanUtils;
 
