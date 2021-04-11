@@ -19,12 +19,22 @@ public abstract class MapBasedConfigSource implements ConfigSource {
 
     private final int ordinal;
 
-    private final Map<String, String> configData;
+    private  Map<String, String> configData;
 
     protected MapBasedConfigSource(String name, int ordinal) {
+        this(name, ordinal, false);
+    }
+
+    public MapBasedConfigSource(String name, int ordinal, boolean initSource) {
         this.name = name;
         this.ordinal = ordinal;
-        this.configData = getProperties();
+        if (initSource){
+            initSource();
+        }
+    }
+
+    protected void initSource() {
+        configData = getProperties();
     }
 
     /**

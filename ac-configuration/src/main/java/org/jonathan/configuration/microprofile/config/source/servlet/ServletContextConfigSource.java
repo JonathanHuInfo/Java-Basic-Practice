@@ -9,15 +9,14 @@ import java.util.Map;
 import static java.lang.String.format;
 
 public class ServletContextConfigSource extends MapBasedConfigSource {
-    /**
-     * 临时解决 初始化时机问题
-     */
-     public  static ServletContext servletContext;
+
+    public final  ServletContext servletContext;
 
     public ServletContextConfigSource(ServletContext servletContext) {
         super(format("ServletContext[path:%s] Init Parameters", servletContext.getContextPath()), 500);
+        this.servletContext = servletContext;
+        initSource();
     }
-
 
 
     @Override
@@ -26,6 +25,7 @@ public class ServletContextConfigSource extends MapBasedConfigSource {
         while (parameterNames.hasMoreElements()) {
             String parameterName = parameterNames.nextElement();
             configData.put(parameterName, servletContext.getInitParameter(parameterName));
+
         }
     }
 }

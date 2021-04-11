@@ -19,8 +19,6 @@ public class ServletContextConfigInitializer implements ServletContextListener {
     @Override
     public void contextInitialized(ServletContextEvent servletContextEvent) {
         ServletContext servletContext = servletContextEvent.getServletContext();
-        //临时解决方案
-        ServletContextConfigSource.servletContext=servletContext;
         ServletContextConfigSource servletContextConfigSource = new ServletContextConfigSource(servletContext);
         // 获取当前 ClassLoader
         ClassLoader classLoader = servletContext.getClassLoader();
