@@ -22,7 +22,7 @@ public abstract class MapBasedConfigSource implements ConfigSource {
     private  Map<String, String> configData;
 
     protected MapBasedConfigSource(String name, int ordinal) {
-        this(name, ordinal, false);
+        this(name, ordinal, true);
     }
 
     public MapBasedConfigSource(String name, int ordinal, boolean initSource) {
