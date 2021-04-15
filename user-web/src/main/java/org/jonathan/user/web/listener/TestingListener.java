@@ -133,8 +133,10 @@ public class TestingListener implements ServletContextListener {
 
     private void testJms(ConnectionFactory connectionFactory) {
         ThrowableAction.execute(() -> {
-           testMessageProducer(connectionFactory);
-            //testMessageConsumer(connectionFactory);
+            //官方DEMO
+            // testMessageProducer(connectionFactory);
+            //调整后
+            testMessageConsumer(connectionFactory);
         });
     }
 
