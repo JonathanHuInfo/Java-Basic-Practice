@@ -6,11 +6,13 @@ import org.eclipse.microprofile.config.spi.ConfigBuilder;
 import org.eclipse.microprofile.config.spi.ConfigProviderResolver;
 import org.jonathan.context.ClassicComponentContext;
 import org.jonathan.context.ComponentContext;
+import org.jonathan.function.ThrowableAction;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.management.MBeanHelper;
 import org.jonathan.user.management.UserManager;
 import org.jonathan.user.sql.DBConnectionManager;
 
+import javax.jms.*;
 import javax.management.ObjectName;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityTransaction;
@@ -48,6 +50,9 @@ public class TestingListener implements ServletContextListener {
         testMicroprofileConfig();
         //注册MBean
         registerMBean();
+
+        ConnectionFactory connectionFactory = context.getComponent("jms/activemq-factory");
+        testJms(connectionFactory);
     }
 
     private void testPropertyFromServletContext(ServletContext servletContext) {
@@ -124,5 +129,70 @@ public class TestingListener implements ServletContextListener {
         String propertyName = "maxValue";
         logger.info("JNDI Property[" + propertyName + "] : "
                 + context.lookupComponent(propertyName));
+    }
+
+    private void testJms(ConnectionFactory connectionFactory) {
+        ThrowableAction.execute(() -> {
+           testMessageProducer(connectionFactory);
+            //testMessageConsumer(connectionFactory);
+        });
+    }
+
+    private void testMessageProducer(ConnectionFactory connectionFactory) throws JMSException {
+        // Create a Connection
+        Connection connection = connectionFactory.createConnection();
+        connection.start();
+
+        // Create a Session
+        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+        // Create the destination (Topic or Queue)
+        Destination destination = session.createQueue("TEST.FOO");
+
+        // Create a MessageProducer from the Session to the Topic or Queue
+        MessageProducer producer = session.createProducer(destination);
+        producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
+
+        // Create a messages
+        String text = "Hello world! From: " + Thread.currentThread().getName() + " : " + this.hashCode();
+        TextMessage message = session.createTextMessage(text);
+
+        // Tell the producer to send the message
+        producer.send(message);
+        System.out.printf("[Thread : %s] Sent message : %s\n", Thread.currentThread().getName(), message.getText());
+
+        // Clean up
+        session.close();
+        connection.close();
+
+    }
+
+    private void testMessageConsumer(ConnectionFactory connectionFactory) throws JMSException {
+
+        // Create a Connection
+        Connection connection = connectionFactory.createConnection();
+        connection.start();
+
+        // Create a Session
+        Session session = connection.createSession(false, Session.AUTO_ACKNOWLEDGE);
+
+        // Create the destination (Topic or Queue)
+        Destination destination = session.createQueue("TEST.FOO");
+
+        // Create a MessageConsumer from the Session to the Topic or Queue
+        MessageConsumer consumer = session.createConsumer(destination);
+
+        consumer.setMessageListener(m -> {
+            TextMessage tm = (TextMessage) m;
+            try {
+                System.out.printf("[Thread : %s] Received : %s\n", Thread.currentThread().getName(), tm.getText());
+            } catch (JMSException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
+        // Clean up
+        // session.close();
+        // connection.close();
     }
 }

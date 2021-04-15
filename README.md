@@ -61,3 +61,9 @@ Bean validator
 - Service层可以依赖注入
 - Query无法查询出数据
 - 没有完成 config 在mvc中的应用
+
+# 第五周
+## 内容描述
+- 远程调用
+- 异步服务
+## 作业描述
