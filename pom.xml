@@ -68,7 +68,7 @@
         <jackson.version>2.9.5</jackson.version>
         <activemq.version>5.9.1</activemq.version>
         <jolokia.version>1.6.2</jolokia.version>
-
+        <resteasy.version>3.0.2.Final</resteasy.version>
         <!-- Testing 版本 -->
         <junit.version>4.13</junit.version>
 
@@ -238,6 +238,12 @@
                 <version>${activemq.version}</version>
             </dependency>
 
+            <!--  Jboss resteasy -->
+            <dependency>
+                <groupId>org.jboss.resteasy</groupId>
+                <artifactId>resteasy-client</artifactId>
+                <version>${resteasy.version}</version>
+            </dependency>
             <!-- Testing Dependencies -->
 
             <!-- JUnit -->
@@ -434,30 +440,30 @@
         </profile>
     </profiles>
     <!-- 配置远程仓库 如果需要deploy 到远程仓库需要 setting.xml 配置 仓库账号  -->
-   <!-- <distributionManagement>
-        <repository>
-            <id>nexus-releases</id>
-            <name>Nexus Release Repository</name>
-            <url>http://39.98.242.200:19961/repository/maven-releases/</url>
-        </repository>
-        <snapshotRepository>
-            <id>nexus-snapshots</id>
-            <name>Nexus Snapshot Repository</name>
-            <url>http://39.98.242.200:19961/repository/maven-snapshots/</url>
-        </snapshotRepository>
-    </distributionManagement>
-    <repositories>
-        <repository>
-            <id>Nexus</id>
-            <name>Nexus Repository</name>
-            <url>http://39.98.242.200:19961/repository/maven-public/</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            &lt;!&ndash;snapshots默认是关闭的,需要开启  &ndash;&gt;
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-    </repositories>-->
+    <!-- <distributionManagement>
+         <repository>
+             <id>nexus-releases</id>
+             <name>Nexus Release Repository</name>
+             <url>http://39.98.242.200:19961/repository/maven-releases/</url>
+         </repository>
+         <snapshotRepository>
+             <id>nexus-snapshots</id>
+             <name>Nexus Snapshot Repository</name>
+             <url>http://39.98.242.200:19961/repository/maven-snapshots/</url>
+         </snapshotRepository>
+     </distributionManagement>
+     <repositories>
+         <repository>
+             <id>Nexus</id>
+             <name>Nexus Repository</name>
+             <url>http://39.98.242.200:19961/repository/maven-public/</url>
+             <releases>
+                 <enabled>true</enabled>
+             </releases>
+             &lt;!&ndash;snapshots默认是关闭的,需要开启  &ndash;&gt;
+             <snapshots>
+                 <enabled>true</enabled>
+             </snapshots>
+         </repository>
+     </repositories>-->
 </project>
