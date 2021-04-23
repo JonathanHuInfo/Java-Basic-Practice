@@ -69,6 +69,8 @@
         <activemq.version>5.9.1</activemq.version>
         <jolokia.version>1.6.2</jolokia.version>
         <resteasy.version>3.0.2.Final</resteasy.version>
+        <tomcat7.version>7.0.37</tomcat7.version>
+
         <!-- Testing 版本 -->
         <junit.version>4.13</junit.version>
 
@@ -244,6 +246,26 @@
                 <artifactId>resteasy-client</artifactId>
                 <version>${resteasy.version}</version>
             </dependency>
+
+            <!-- Apache Tomcat -->
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-catalina-ha</artifactId>
+                <version>${tomcat7.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-dbcp</artifactId>
+                <version>${tomcat7.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.tomcat</groupId>
+                <artifactId>tomcat-jdbc</artifactId>
+                <version>${tomcat7.version}</version>
+            </dependency>
+
             <!-- Testing Dependencies -->
 
             <!-- JUnit -->
