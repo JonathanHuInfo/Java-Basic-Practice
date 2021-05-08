@@ -54,7 +54,7 @@
     <Resource name="bean/TestingComponent" auth="Container"
               type="org.jonathan.user.web.listener.TestingComponent"
               factory="org.apache.naming.factory.BeanFactory"/>
-
+    <!-- vm://localhost tcp://127.0.0.1:61616 -->
     <Resource name="jms/activemq-factory"
               auth="Container"
               type="org.apache.activemq.ActiveMQConnectionFactory"

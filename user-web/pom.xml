@@ -33,6 +33,12 @@
             <artifactId>ac-web-mvc</artifactId>
             <version>${revision}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.jonathan</groupId>
+            <artifactId>ac-cache</artifactId>
+            <version>${revision}</version>
+        </dependency>
         <!-- Servlet API -->
         <dependency>
             <groupId>javax.servlet</groupId>
