@@ -20,7 +20,8 @@ import io.lettuce.core.RedisClient;
 import io.lettuce.core.api.StatefulRedisConnection;
 import io.lettuce.core.api.sync.RedisCommands;
 import org.jonathan.cache.event.TestCacheEntryListener;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 import redis.clients.jedis.JedisPoolConfig;
@@ -33,13 +34,12 @@ import javax.cache.spi.CachingProvider;
 import java.net.URI;
 
 import static org.jonathan.cache.configuration.ConfigurationUtils.cacheEntryListenerConfiguration;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 /**
- * {@link CachingProvider}
+ * {@link Caching} Test
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
  * @since
  */
 public class CachingTest {
@@ -51,6 +51,7 @@ public class CachingTest {
         // configure the cache
         MutableConfiguration<String, Integer> config =
                 new MutableConfiguration<String, Integer>()
+                        .setManagementEnabled(true)
                         .setTypes(String.class, Integer.class);
 
         // create the cache
@@ -77,14 +78,15 @@ public class CachingTest {
     @Test
     public void testSampleRedis() {
         CachingProvider cachingProvider = Caching.getCachingProvider();
-        CacheManager cacheManager = cachingProvider.getCacheManager(URI.create("redis://127.0.0.1:6379/"), null);
+        CacheManager cacheManager = cachingProvider.getCacheManager(URI.create("redis://localhost:6379/"), null);
         // configure the cache
         MutableConfiguration<String, Integer> config =
                 new MutableConfiguration<String, Integer>()
+                        .setManagementEnabled(true)
                         .setTypes(String.class, Integer.class);
 
         // create the cache
-        Cache<String, Integer> cache = cacheManager.createCache("redisCache", config);
+        Cache<String, Integer> cache = cacheManager.createCache("redisCache1", config);
 
         // add listener
         cache.registerCacheEntryListener(cacheEntryListenerConfiguration(new TestCacheEntryListener<>()));
@@ -102,6 +104,65 @@ public class CachingTest {
         assertEquals(value1, value2);
         cache.remove(key);
         assertNull(cache.get(key));
+    }
+
+
+
+    @Test
+    public void testLettuceUser(){
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        CacheManager cacheManager = cachingProvider.getCacheManager(URI.create("redis://localhost:6379/"), null);
+        // configure the cache
+        MutableConfiguration<String, User> config =
+                new MutableConfiguration<String, User>()
+                        .setTypes(String.class, User.class);
+        // create the cache
+        Cache<String, User> cache = cacheManager.createCache("userCache", config);
+        // add listener
+        cache.registerCacheEntryListener(cacheEntryListenerConfiguration(new TestCacheEntryListener<>()));
+        // cache operations
+        String key = "user";
+        User value1 = new User("ty",1L);
+        cache.put(key, value1);
+
+        // update
+        User value2 = new User("ty",1L);
+        //value1 = value1.setEmail("ty_fzpb@163.com");
+        cache.put(key, value2);
+
+        User value3 = cache.get(key);
+        assertEquals(value2, value3);
+    }
+
+
+    @Test
+    public void testSampleLettuce() {
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        CacheManager cacheManager = cachingProvider.getCacheManager(URI.create("redis://localhost:6379/"), null);
+        // configure the cache
+        MutableConfiguration<String, Integer> config =
+                new MutableConfiguration<String, Integer>()
+                        .setTypes(String.class, Integer.class);
+
+        // create the cache
+        Cache<String, Integer> cache = cacheManager.createCache("redisCache", config);
+
+        // add listener
+        cache.registerCacheEntryListener(cacheEntryListenerConfiguration(new TestCacheEntryListener<>()));
+
+        // cache operations
+        String key = "redis-key";
+        Integer value1 = 1;
+        cache.put(key, value1);
+
+        // update
+        value1 = 5;
+        cache.put(key, value1);
+
+        Integer value2 = cache.get(key);
+        assertEquals(value1, value2);
+        //cache.remove(key);
+        //assertNull(cache.get(key));
     }
 
     @Test
@@ -130,4 +191,7 @@ public class CachingTest {
 /// ... when closing your application:
         pool.close();
     }
+
+
+
 }

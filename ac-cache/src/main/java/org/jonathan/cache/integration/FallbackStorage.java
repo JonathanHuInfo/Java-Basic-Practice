@@ -23,7 +23,7 @@ import java.util.Comparator;
 /**
  * Fallback Storage that only extends {@link CacheLoader} and {@link CacheWriter}
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ *
  * @since 1.0
  */
 public interface FallbackStorage<K, V> extends CacheLoader<K, V>, CacheWriter<K, V> {
@@ -37,6 +37,11 @@ public interface FallbackStorage<K, V> extends CacheLoader<K, V>, CacheWriter<K,
      * @return the less value , the more priority.
      */
     int getPriority();
+
+    /**
+     * Destroy
+     */
+    void destroy();
 
 
     class PriorityComparator implements Comparator<FallbackStorage> {

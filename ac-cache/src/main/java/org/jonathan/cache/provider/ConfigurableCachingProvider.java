@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jonathan.cache;
+package org.jonathan.cache.provider;
 
 import javax.cache.CacheException;
 import javax.cache.CacheManager;
@@ -40,9 +40,9 @@ import static java.lang.String.format;
 /**
  * Configurable {@link CachingProvider}
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ *
  * @see Caching#getCachingProvider()
- * @see org.jonathan.cache.AbstractCacheManager
+ * @see AbstractCacheManager
  * @since 1.0
  */
 public class ConfigurableCachingProvider implements CachingProvider {

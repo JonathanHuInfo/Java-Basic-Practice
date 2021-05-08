@@ -26,7 +26,7 @@ import java.util.Map;
 /**
  * Abstract {@link FallbackStorage} implementation.
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ *
  * @since 1.0
  */
 public abstract class AbstractFallbackStorage<K, V> implements FallbackStorage<K, V> {

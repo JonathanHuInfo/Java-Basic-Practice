@@ -1,6 +1,6 @@
-package org.jonathan.cache.redis;
+package org.jonathan.cache.provider.redis.jedis;
 
-import org.jonathan.cache.AbstractCacheManager;
+import org.jonathan.cache.provider.AbstractCacheManager;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
 

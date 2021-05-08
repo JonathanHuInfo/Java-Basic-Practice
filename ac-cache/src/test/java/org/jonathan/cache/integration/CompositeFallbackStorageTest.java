@@ -16,19 +16,19 @@
  */
 package org.jonathan.cache.integration;
 
-import org.jonathan.cache.EntryAdapter;
-import org.junit.After;
-import org.junit.Test;
+import org.jonathan.cache.ExpirableEntry;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 
 import static java.util.Arrays.asList;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * {@link CompositeFallbackStorage} Test
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ *
  * @since
  */
 public class CompositeFallbackStorageTest {
@@ -37,7 +37,7 @@ public class CompositeFallbackStorageTest {
 
     @Test
     public void writeAllAndLoadAll() {
-        instance.writeAll(asList(EntryAdapter.of("a", 1), EntryAdapter.of("b", 2), EntryAdapter.of("c", 3)));
+        instance.writeAll(asList(ExpirableEntry.of("a", 1), ExpirableEntry.of("b", 2), ExpirableEntry.of("c", 3)));
 
         Map map = instance.loadAll(asList("a", "b", "c"));
         assertEquals(1, map.get("a"));
@@ -45,7 +45,7 @@ public class CompositeFallbackStorageTest {
         assertEquals(3, map.get("c"));
     }
 
-    @After
+    @AfterEach
     public void deleteAll() {
         instance.deleteAll(asList("a", "b", "c"));
     }

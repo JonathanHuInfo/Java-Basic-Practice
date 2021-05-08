@@ -73,3 +73,5 @@ Bean validator
 - 应用容器安全 (没有应用成功)
 - 应用容器高可用
 ## 作业描述
+- 提供一套抽象API实现对象的序列化和反序列化
+- 通过Lettuce实现一套Redis CacheManager以及Cache

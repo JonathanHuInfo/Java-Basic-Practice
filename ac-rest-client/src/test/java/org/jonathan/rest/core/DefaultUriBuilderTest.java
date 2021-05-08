@@ -17,12 +17,12 @@
 package org.jonathan.rest.core;
 
 import org.jonathan.rest.util.Maps;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>

@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jonathan.cache;
+package org.jonathan.cache.provider;
 
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
@@ -25,10 +25,10 @@ import java.util.Objects;
 /**
  * The type pair of key and value.
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ *
  * @since 1.0
  */
-class KeyValueTypePair {
+public class KeyValueTypePair {
 
     private final Class<?> keyType;
 

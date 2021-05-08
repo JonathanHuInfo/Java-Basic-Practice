@@ -1,11 +1,11 @@
 package org.jonathan.configuration.microprofile.config.converter;
 
 
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * {@link Converters} Test
@@ -14,12 +14,9 @@ public class ConvertersTest {
 
     private Converters converters;
 
-    @BeforeClass
-    public static void prepare() {
 
-    }
 
-    @Before
+    @BeforeEach
     public void init() {
         converters = new Converters();
     }

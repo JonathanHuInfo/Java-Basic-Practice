@@ -16,7 +16,8 @@
  */
 package org.jonathan.rest.util;
 
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,7 +25,7 @@ import java.util.Map;
 import static java.util.Collections.emptyMap;
 import static org.jonathan.rest.util.URLUtils.resolveVariables;
 import static org.jonathan.rest.util.URLUtils.toTemplateVariables;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * {@link org.jonathan.rest.util.URLUtils}

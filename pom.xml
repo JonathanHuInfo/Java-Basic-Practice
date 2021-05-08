@@ -76,8 +76,7 @@
         <jedis.version>3.5.2</jedis.version>
 
         <!-- Testing 版本 -->
-        <junit.version>4.13</junit.version>
-
+        <junit.version>5.7.1</junit.version>
         <!-- Maven Plugins 版本 -->
         <maven.compiler.version>3.8.1</maven.compiler.version>
         <maven.source.version>3.2.1</maven.source.version>
@@ -293,8 +292,8 @@
 
             <!-- JUnit -->
             <dependency>
-                <groupId>junit</groupId>
-                <artifactId>junit</artifactId>
+                <groupId>org.junit.jupiter</groupId>
+                <artifactId>junit-jupiter</artifactId>
                 <version>${junit.version}</version>
                 <scope>test</scope>
             </dependency>

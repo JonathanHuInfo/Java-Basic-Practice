@@ -62,6 +62,15 @@
         <servlet-name>jolokia-agent</servlet-name>
         <url-pattern>/jolokia/*</url-pattern>
     </servlet-mapping>
+    <filter>
+        <filter-name>HttpSessionFilter</filter-name>
+        <filter-class>org.jonathan.user.web.filter.HttpSessionFilter</filter-class>
+        <init-param>
+            <!-- Filter 配置 = FilterConfig -->
+            <param-name>javax.cache.CacheManager.uri</param-name>
+            <param-value>redis://127.0.0.1:6379/</param-value>
+        </init-param>
+    </filter>
 
     <!-- 自定义实现 -->
     <filter>

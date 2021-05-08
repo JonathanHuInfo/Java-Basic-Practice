@@ -14,29 +14,31 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.jonathan.cache;
-
-import javax.cache.Cache;
-import javax.cache.CacheManager;
-import javax.cache.configuration.Configuration;
-import javax.cache.spi.CachingProvider;
-import java.net.URI;
-import java.util.Properties;
+package org.jonathan.cache.management;
 
 /**
- * "in-memory" scheme {@link CacheManager}
+ * Cache Statistics
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
- * @since 1.0
+ * @since 1.0.0
+ * Date : 2021-04-13
  */
-public class InMemoryCacheManager extends AbstractCacheManager {
+public interface CacheStatistics {
 
-    public InMemoryCacheManager(CachingProvider cachingProvider, URI uri, ClassLoader classLoader, Properties properties) {
-        super(cachingProvider, uri, classLoader, properties);
-    }
+    CacheStatistics reset();
 
-    @Override
-    protected <K, V, C extends Configuration<K, V>> Cache doCreateCache(String cacheName, C configuration) {
-        return new InMemoryCache<K, V>(this, cacheName, configuration);
-    }
+    CacheStatistics cacheHits();
+
+    CacheStatistics cacheGets();
+
+    CacheStatistics cachePuts();
+
+    CacheStatistics cacheRemovals();
+
+    CacheStatistics cacheEvictions();
+
+    CacheStatistics cacheGetsTime(long costTime);
+
+    CacheStatistics cachePutsTime(long costTime);
+
+    CacheStatistics cacheRemovesTime(long costTime);
 }

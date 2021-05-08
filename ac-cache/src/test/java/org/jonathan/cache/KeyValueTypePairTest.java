@@ -16,14 +16,16 @@
  */
 package org.jonathan.cache;
 
-import org.junit.Test;
+import org.jonathan.cache.provider.KeyValueTypePair;
+import org.jonathan.cache.provider.memory.InMemoryCache;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * {@link KeyValueTypePair} Test
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ *
  * @since 1.0
  */
 public class KeyValueTypePairTest {

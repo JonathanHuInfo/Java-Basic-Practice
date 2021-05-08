@@ -28,9 +28,9 @@ import static java.util.stream.Collectors.toList;
 import static java.util.stream.StreamSupport.stream;
 
 /**
- * Composite multiple {@link FallbackStorage}s that instantiated by {@link ServiceLoader Java SPI}.
+ * Composite multiple {@link org.jonathan.cache.integration.FallbackStorage}s that instantiated by {@link ServiceLoader Java SPI}.
  *
- * @author <a href="mailto:mercyblitz@gmail.com">Mercy</a>
+ *
  * @since 1.0
  */
 public class CompositeFallbackStorage extends AbstractFallbackStorage<Object, Object> {
@@ -75,5 +75,10 @@ public class CompositeFallbackStorage extends AbstractFallbackStorage<Object, Ob
     @Override
     public void delete(Object key) throws CacheWriterException {
         fallbackStorages.forEach(fallbackStorage -> fallbackStorage.delete(key));
+    }
+
+    @Override
+    public void destroy() {
+        fallbackStorages.forEach(FallbackStorage::destroy);
     }
 }
