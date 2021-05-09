@@ -54,7 +54,7 @@ public class FileFallbackStorageTest {
     }
 
     @AfterEach
-    public void deleteAll() {
+     void deleteAll() {
         instance.deleteAll(asList("a", "b", "c"));
     }
 

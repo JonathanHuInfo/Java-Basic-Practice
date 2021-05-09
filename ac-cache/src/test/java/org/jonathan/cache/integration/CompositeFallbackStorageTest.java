@@ -46,7 +46,7 @@ public class CompositeFallbackStorageTest {
     }
 
     @AfterEach
-    public void deleteAll() {
+     void deleteAll() {
         instance.deleteAll(asList("a", "b", "c"));
     }
 

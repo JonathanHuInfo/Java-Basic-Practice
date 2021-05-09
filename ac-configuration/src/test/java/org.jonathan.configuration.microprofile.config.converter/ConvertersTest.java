@@ -4,20 +4,21 @@ package org.jonathan.configuration.microprofile.config.converter;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInstance;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 /**
  * {@link Converters} Test
  */
+@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class ConvertersTest {
 
     private Converters converters;
 
 
-
-    @BeforeEach
-    public void init() {
+    @BeforeAll
+    void init() {
         converters = new Converters();
     }
 
