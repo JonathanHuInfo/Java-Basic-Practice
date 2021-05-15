@@ -17,6 +17,7 @@
         <module>ac-rest-client</module>
         <module>ac-web-mvc</module>
         <module>ac-cache</module>
+        <module>user-data</module>
     </modules>
     <scm>
         <url>https://github.com/JonathanHuInfo/actual-fromwork</url>
@@ -75,6 +76,9 @@
         <lettuce.version>6.1.0.RELEASE</lettuce.version>
         <jedis.version>3.5.2</jedis.version>
 
+        <!-- Spring 依赖版本 -->
+        <spring-boot.version>2.4.5</spring-boot.version>
+
         <!-- Testing 版本 -->
         <junit.version>5.7.1</junit.version>
         <!-- Maven Plugins 版本 -->
@@ -93,6 +97,15 @@
     <dependencyManagement>
 
         <dependencies>
+            <!-- Spring Boot Dependencies -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
             <!-- Servlet 3.1 API -->
             <dependency>
                 <groupId>javax.servlet</groupId>

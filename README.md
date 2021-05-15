@@ -1,5 +1,6 @@
 # actual-fromwork
 ## 描述
+Mercy  Java Training Camp zero
 主要用于主脉路学习
 ## Web启动
 1. ROOT maven  clean <next> install
@@ -69,9 +70,20 @@ Bean validator
 ## 作业描述
 
 # 第六周
-## 内容描述
+    ## 内容描述
 - 应用容器安全 (没有应用成功)
 - 应用容器高可用
 ## 作业描述
 - 提供一套抽象API实现对象的序列化和反序列化
 - 通过Lettuce实现一套Redis CacheManager以及Cache
+
+# 第七周
+## 内容描述
+- Spring基础(IOC MVC)
+- Spring JDBC、Spring Vaildator(Spring 数据存储与校验)
+- Spring 配置管理、Spring 监控管理
+
+## 作业描述
+- auth2 登录
+### 步骤
+[官方文档](https://gitee.com/api/v5/oauth_doc#/list-item-2)
