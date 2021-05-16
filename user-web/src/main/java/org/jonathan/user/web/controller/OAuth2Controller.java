@@ -6,6 +6,7 @@ import org.jonathan.user.oauth.config.AuthConfig;
 import org.jonathan.user.oauth.model.AuthCallback;
 import org.jonathan.user.oauth.model.AuthResponse;
 import org.jonathan.user.oauth.request.AuthReqeust;
+import org.jonathan.user.oauth.request.GitHubAuthRequest;
 import org.jonathan.user.oauth.request.GiteeAuthRequest;
 import org.jonathan.web.mvc.controller.Controller;
 
@@ -43,7 +44,7 @@ public class OAuth2Controller implements Controller {
             return new GiteeAuthRequest(new AuthConfig().setClientId(clientId).setClientSecret(clientSecret)
                     .setRedirectUri(redirectUri));
         }
-        return new GiteeAuthRequest(new AuthConfig().setClientId(clientId).setClientSecret(clientSecret)
+        return new GitHubAuthRequest(new AuthConfig().setClientId(clientId).setClientSecret(clientSecret)
                 .setRedirectUri(redirectUri));
     }
 
