@@ -89,4 +89,3 @@ Bean validator
 [Gitee Oauth Doc](https://gitee.com/api/v5/oauth_doc#/list-item-2)
 
 [Github Oauth Doc](https://docs.github.com/en/developers/apps/authorizing-oauth-apps)
-
