@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>org.jonathan</groupId>
+            <artifactId>ac-rest-client</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jonathan</groupId>
             <artifactId>ac-configuration</artifactId>
             <version>${revision}</version>
         </dependency>
@@ -79,14 +84,8 @@
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
             <version>3.0.0</version>
+            <scope>provided</scope>
         </dependency>
-
-        <dependency>
-            <groupId>org.glassfish</groupId>
-            <artifactId>javax.el</artifactId>
-            <version>3.0.1-b11</version>
-        </dependency>
-
         <dependency>
             <groupId>commons-configuration</groupId>
             <artifactId>commons-configuration</artifactId>
@@ -112,23 +111,23 @@
         </dependency>
 
         <!-- Apache Tomcat -->
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-catalina-ha</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.tomcat</groupId>-->
+<!--            <artifactId>tomcat-catalina-ha</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-dbcp</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.tomcat</groupId>-->
+<!--            <artifactId>tomcat-dbcp</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
 
-        <dependency>
-            <groupId>org.apache.tomcat</groupId>
-            <artifactId>tomcat-jdbc</artifactId>
-            <scope>runtime</scope>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.apache.tomcat</groupId>-->
+<!--            <artifactId>tomcat-jdbc</artifactId>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
     </dependencies>
 
     <build>
@@ -163,6 +162,9 @@
                     java.naming.factory.initial
                     -->
                     <enableNaming>true</enableNaming>
+                    <tomcatConfigurationFilesDirectory>
+                        src/main/webapp/META-INF/conf/
+                    </tomcatConfigurationFilesDirectory>
                 </configuration>
             </plugin>
         </plugins>

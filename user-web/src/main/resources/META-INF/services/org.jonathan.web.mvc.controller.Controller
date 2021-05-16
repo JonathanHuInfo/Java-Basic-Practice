@@ -3,3 +3,4 @@ org.jonathan.user.web.controller.RegisterActionController
 org.jonathan.user.web.controller.RegisterPageController
 org.jonathan.user.web.controller.LoginPageController
 org.jonathan.user.web.controller.SignInActionController
+org.jonathan.user.web.controller.OAuth2Controller

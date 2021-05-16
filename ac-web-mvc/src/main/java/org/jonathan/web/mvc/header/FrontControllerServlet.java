@@ -1,10 +1,13 @@
 package org.jonathan.web.mvc.header;
 
 import org.apache.commons.lang.StringUtils;
+import org.jonathan.context.ClassicComponentContext;
+import org.jonathan.context.ComponentContext;
 import org.jonathan.web.mvc.controller.Controller;
 import org.jonathan.web.mvc.controller.PageController;
 import org.jonathan.web.mvc.controller.RestController;
 
+import javax.annotation.Resource;
 import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +20,6 @@ import java.lang.reflect.Method;
 import java.util.*;
 
 import static java.util.Arrays.asList;
-import static org.apache.commons.lang.StringUtils.substringAfter;
 
 /**
  * @description: 前端控制器Servlet
@@ -38,6 +40,7 @@ public class FrontControllerServlet extends HttpServlet {
      */
     private Map<String, HandlerMethodInfo> handleMethodInfoMapping = new HashMap<>();
 
+    private ComponentContext context = null;
     /**
      * object 方法名称集合
      */
@@ -59,6 +62,8 @@ public class FrontControllerServlet extends HttpServlet {
      * @param servletConfig
      */
     public void init(ServletConfig servletConfig) {
+        ComponentContext context = (ComponentContext) servletConfig.getServletContext().getAttribute(ClassicComponentContext.CONTEXT_NAME);
+        this.context = context;
         initHandleMethods();
     }
 
@@ -77,23 +82,43 @@ public class FrontControllerServlet extends HttpServlet {
 
             //获取注解中的value 值
             Path pathFromClass = controllerClass.getAnnotation(Path.class);
-            String requestPath = pathFromClass.value();
+            String classRequestPath = pathFromClass.value();
             //获取 实例class的方法
             Method[] publicMathods = controllerClass.getMethods();
             //处理方法支持的Http方法集合
             for (Method method : publicMathods) {
-                //查找方法上的标注的Http方法集合（多个注解）
+
+                String realRequestPath = "/".equals(classRequestPath) ? "" : classRequestPath;
                 Set<String> supportedHttpMethods = findSupportedHttpMethods(method);
-                //获取方法上的路径 并且组装完整的路径
-                Path pathFormMethod = method.getAnnotation(Path.class);
-                if (pathFormMethod != null) {
-                    requestPath += pathFormMethod.value();
+                Path pathFromMethod = method.getAnnotation(Path.class);
+                if (pathFromMethod == null) {
+                    continue;
                 }
-                handleMethodInfoMapping.put(requestPath,
-                        new HandlerMethodInfo(requestPath, method, supportedHttpMethods));
+                realRequestPath += pathFromMethod.value();
+                handleMethodInfoMapping.put(realRequestPath,
+                        new HandlerMethodInfo(realRequestPath, method, supportedHttpMethods));
+                controllersMapping.put(realRequestPath, controller);
             }
-            controllersMapping.put(requestPath, controller);
+            injectControllerField(controller);
         }
+    }
+
+    /**
+     * 注入Cotroller 字段
+     *
+     * @param controller
+     */
+    private void injectControllerField(Controller controller) {
+        Arrays.stream(controller.getClass().getDeclaredFields())
+                .filter(field -> field.isAnnotationPresent(Resource.class))
+                .forEach(field -> {
+                    field.setAccessible(true);
+                    try {
+                        field.set(controller, this.context.getComponent(field.getAnnotation(Resource.class).name()));
+                    } catch (IllegalAccessException e) {
+                        new RuntimeException(e);
+                    }
+                });
     }
 
     /**
@@ -157,22 +182,33 @@ public class FrontControllerServlet extends HttpServlet {
                         resp.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
                         return;
                     }
-                    //页面渲染请求
-                    if (controller instanceof PageController) {
-                        PageController pageController = PageController.class.cast(controller);
-                        //执行到业务代码上 得到返回到页面的路径
-                        String viewPath = pageController.execute(req, resp);
-
-                        ServletContext servletContext = req.getServletContext();
-                        if (!viewPath.startsWith("/")) {
-                            viewPath = "/" + viewPath;
-                        }
-                        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(viewPath);
-                        requestDispatcher.forward(req, resp);
+                    Method handlerMethod = handlerMethodInfo.getHandlerMethod();
+                    String viewPath = (String) handlerMethod.invoke(controller, req, resp);
+                    if (StringUtils.isBlank(viewPath)){
                         return;
-                    } else if (controller instanceof RestController) {
-                        //TODO RestController实现
                     }
+                    ServletContext servletContext = req.getServletContext();
+                    if (!viewPath.startsWith("/")) {
+                        viewPath = "/" + viewPath;
+                    }
+                    RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(viewPath);
+                    requestDispatcher.forward(req, resp);
+                    //页面渲染请求
+//                    if (controller instanceof PageController) {
+//                        PageController pageController = PageController.class.cast(controller);
+//                        //执行到业务代码上 得到返回到页面的路径
+//                        String viewPath = pageController.execute(req, resp);
+//
+//                        ServletContext servletContext = req.getServletContext();
+//                        if (!viewPath.startsWith("/")) {
+//                            viewPath = "/" + viewPath;
+//                        }
+//                        RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(viewPath);
+//                        requestDispatcher.forward(req, resp);
+//                        return;
+//                    } else if (controller instanceof RestController) {
+//                        //TODO RestController实现
+//                    }
                 }
             } catch (Throwable throwable) {
                 if (throwable.getCause() instanceof IOException) {

@@ -85,5 +85,8 @@ Bean validator
 
 ## 作业描述
 - auth2 登录
-### 步骤
-[官方文档](https://gitee.com/api/v5/oauth_doc#/list-item-2)
+### OAuth2 Doc
+[Gitee Oauth Doc](https://gitee.com/api/v5/oauth_doc#/list-item-2)
+
+[Github Oauth Doc](https://docs.github.com/en/developers/apps/authorizing-oauth-apps)
+

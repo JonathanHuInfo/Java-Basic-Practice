@@ -13,11 +13,12 @@ import javax.ws.rs.Path;
  * @since:
  * @create: 2021-03-13 19:28
  **/
-@Path("/register-form")
+@Path("/")
 public class RegisterPageController implements PageController {
 
     @GET
     @Override
+    @Path("/register-form")
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         return "register-form.jsp";
     }

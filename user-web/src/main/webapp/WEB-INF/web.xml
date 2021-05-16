@@ -151,5 +151,26 @@
     <!--            org.jonathan.user.sql.DBConnectionManager-->
     <!--        </resource-env-ref-type>-->
     <!--    </resource-env-ref>-->
+<!--    <security-constraint>-->
+<!--        <web-resource-collection>-->
+<!--            <web-resource-name>Hello,World</web-resource-name>-->
+<!--            <url-pattern>/hello/world</url-pattern>-->
+<!--        </web-resource-collection>-->
+<!--        <auth-constraint>-->
+<!--            &lt;!&ndash; NOTE:  This role is not present in the default users file &ndash;&gt;-->
+<!--            <role-name>tomcat</role-name>-->
+<!--        </auth-constraint>-->
+<!--    </security-constraint>-->
+
+<!--    &lt;!&ndash; Define the Login Configuration for this Application &ndash;&gt;-->
+<!--    <login-config>-->
+<!--        <auth-method>BASIC</auth-method>-->
+<!--        <realm-name>Tomcat Host Manager Application</realm-name>-->
+<!--    </login-config>-->
+
+<!--    &lt;!&ndash; Security roles referenced by this web application &ndash;&gt;-->
+<!--    <security-role>-->
+<!--        <role-name>tomcat</role-name>-->
+<!--    </security-role>-->
 
 </web-app>

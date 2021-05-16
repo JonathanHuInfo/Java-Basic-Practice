@@ -5,6 +5,7 @@ import org.jonathan.context.ClassicComponentContext;
 import org.jonathan.context.ComponentContext;
 import org.jonathan.user.doman.User;
 import org.jonathan.user.service.UserService;
+import org.jonathan.web.mvc.controller.Controller;
 import org.jonathan.web.mvc.controller.PageController;
 
 import javax.annotation.Resource;
@@ -19,19 +20,14 @@ import javax.ws.rs.Path;
  * @since:
  * @create: 2021-03-13 19:27
  **/
-@Path("/register")
-public class RegisterActionController implements PageController {
-
+@Path("/")
+public class RegisterActionController implements Controller {
+    @Resource(name = "bean/UserService")
     private UserService userService;
 
-
-    @Resource(name = "bean/UserService")
-    private  UserService service;
-
     @POST
-    @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Throwable {
-        userService= ClassicComponentContext.getInstance().getComponent("bean/UserService");
+    @Path("/register")
+    public String register(HttpServletRequest request, HttpServletResponse response) throws Throwable {
         String name = request.getParameter("name");
         String password = request.getParameter("password");
         String email = request.getParameter("email");

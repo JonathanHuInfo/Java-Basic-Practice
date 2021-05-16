@@ -38,4 +38,9 @@
 			<p class="mt-5 mb-3 text-muted">&copy; 2017-2021</p>
 		</form>
 	</div>
+	<div class="container">
+		<span>其他方式登录</span>
+		<a href="/login/gitee" img="/static/img/gitee.jpg" title="使用gitee账号登录"/>gitee账号登录
+		<a href="/login/github" img="/static/img/github.jpg" title="使用github账号登录"/>github账号登录
+	</div>
 </body>
