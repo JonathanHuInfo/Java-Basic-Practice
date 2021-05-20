@@ -89,3 +89,12 @@ Bean validator
 [Gitee Oauth Doc](https://gitee.com/api/v5/oauth_doc#/list-item-2)
 
 [Github Oauth Doc](https://docs.github.com/en/developers/apps/authorizing-oauth-apps)
+
+# 第八周
+## 内容描述
+- 安全架构(Spring security)
+- 服务架构(Spring mvc)
+
+# 第九周
+## 内容描述
+- 高可用架构
